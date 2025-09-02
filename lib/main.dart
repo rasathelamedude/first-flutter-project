@@ -13,24 +13,24 @@ class MyApp extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return MyAppState();
+    return _MyAppState();
   }
 }
 
-class MyAppState extends State<MyApp> {
-  var currentQuestion = 0;
+class _MyAppState extends State<MyApp> {
+  var _questionIndex = 0;
 
-  void answerQuestion() {
+  void _questionAnswer() {
     setState(() {
-      currentQuestion += 1;
+      _questionIndex += 1;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     var questions = [
-      "What's your favorite color?",
-      "What's your favorite animal?",
+      "What is your favorite color?",
+      "What is your favorite animal?",
     ];
 
     return MaterialApp(
@@ -38,18 +38,10 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(title: Text("My First Flutter App!")),
         body: Column(
           children: [
-            Text(questions[currentQuestion]),
-            ElevatedButton(onPressed: answerQuestion, child: Text("Black")),
-            ElevatedButton(
-              onPressed: () => print("Answer 2 chosen"),
-              child: Text("Green"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                print("Answer 3 chosen!");
-              },
-              child: Text("Blue"),
-            ),
+            Text(questions[_questionIndex]),
+            ElevatedButton(onPressed: _questionAnswer, child: Text("Answer 1")),
+            ElevatedButton(onPressed: _questionAnswer, child: Text("Answer 2")),
+            ElevatedButton(onPressed: _questionAnswer, child: Text("Answer 3")),
           ],
         ),
       ),
