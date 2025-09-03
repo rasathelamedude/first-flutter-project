@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
+import './question.dart';
+
+// Main Method;
 void main() => runApp(MyApp());
 
-// Refactored from a stateless widget to a statefull widget;
-// We need two classes for statefull widgets, one that can be re-built (Widget), another that is persistant (WidgetState);
-// Generally a state is data or information that your widget uses;
-// Statefull => Internal state can be altered;
-// Stateless => Internal state can't be changed;
-
+// Main Application Widget;
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -17,6 +15,7 @@ class MyApp extends StatefulWidget {
   }
 }
 
+// Main Application's State;
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
 
@@ -38,7 +37,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(title: Text("My First Flutter App!")),
         body: Column(
           children: [
-            Text(questions[_questionIndex]),
+            Question(questions[_questionIndex]),
             ElevatedButton(onPressed: _questionAnswer, child: Text("Answer 1")),
             ElevatedButton(onPressed: _questionAnswer, child: Text("Answer 2")),
             ElevatedButton(onPressed: _questionAnswer, child: Text("Answer 3")),
