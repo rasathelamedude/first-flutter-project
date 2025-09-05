@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './question.dart';
+import './Question.dart';
+import './AnswerButton.dart';
 
 // Main Method;
 void main() => runApp(MyApp());
@@ -32,15 +33,20 @@ class _MyAppState extends State<MyApp> {
       "What is your favorite animal?",
     ];
 
+    var answers = [
+      ["Blue", "White", "Red"],
+      ["Cat", "Dog", "Bird"],
+    ];
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text("My First Flutter App!")),
         body: Column(
           children: [
             Question(questions[_questionIndex]),
-            ElevatedButton(onPressed: _questionAnswer, child: Text("Answer 1")),
-            ElevatedButton(onPressed: _questionAnswer, child: Text("Answer 2")),
-            ElevatedButton(onPressed: _questionAnswer, child: Text("Answer 3")),
+            AnswerButton(answers[_questionIndex][0], _questionAnswer), // passing a callback pointer as an argument
+            AnswerButton(answers[_questionIndex][1], _questionAnswer),
+            AnswerButton(answers[_questionIndex][2], _questionAnswer),
           ],
         ),
       ),
