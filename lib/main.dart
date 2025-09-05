@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './Question.dart';
 import './AnswerButton.dart';
+import './QuestionModel.dart';
 
 // Main Method;
 void main() => runApp(MyApp());
@@ -28,14 +29,16 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      "What is your favorite color?",
-      "What is your favorite animal?",
-    ];
-
-    var answers = [
-      ["Blue", "White", "Red"],
-      ["Cat", "Dog", "Bird"],
+    // Use a class to instantiate questions and answers; Map can be used as well;
+    List<QuestionModel> questions = [
+      QuestionModel(
+        questionText: "What is your favorite color?",
+        answers: ["White", "Red", "Blue"],
+      ),
+      QuestionModel(
+        questionText: "What is your favorite animal?",
+        answers: ["Cat", "Dog", "Bird"],
+      ),
     ];
 
     return MaterialApp(
@@ -43,10 +46,10 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(title: Text("My First Flutter App!")),
         body: Column(
           children: [
-            Question(questions[_questionIndex]),
-            AnswerButton(answers[_questionIndex][0], _questionAnswer), // passing a callback pointer as an argument
-            AnswerButton(answers[_questionIndex][1], _questionAnswer),
-            AnswerButton(answers[_questionIndex][2], _questionAnswer),
+            Question(questions[_questionIndex].questionText),
+            AnswerButton(questions[_questionIndex].answers![0], _questionAnswer), // passing a callback pointer as an argument
+            AnswerButton(questions[_questionIndex].answers![1], _questionAnswer),
+            AnswerButton(questions[_questionIndex].answers![2], _questionAnswer),
           ],
         ),
       ),
