@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // Use a class to instantiate questions and answers; Map can be used as well;
-    List<QuestionModel> questions = [
+    const List<QuestionModel> _questions = [
       QuestionModel(
         questionText: "What is your favorite color?",
         answers: ["White", "Red", "Blue"],
@@ -46,10 +46,10 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(title: Text("My First Flutter App!")),
         body: Column(
           children: [
-            Question(questions[_questionIndex].questionText),
-            AnswerButton(questions[_questionIndex].answers![0], _questionAnswer), // passing a callback pointer as an argument
-            AnswerButton(questions[_questionIndex].answers![1], _questionAnswer),
-            AnswerButton(questions[_questionIndex].answers![2], _questionAnswer),
+            Question(_questions[_questionIndex].questionText), // Question
+            ..._questions[_questionIndex].answers!.map(
+              (answer) => AnswerButton(answer, _questionAnswer),
+            ), // Answer buttons
           ],
         ),
       ),
