@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import './Question.dart';
-import './AnswerButton.dart';
 import './QuestionModel.dart';
+import './Result.dart';
+import 'QuizQuestion.dart';
 
 // Main Method;
 void main() => runApp(MyApp());
@@ -19,8 +19,8 @@ class MyApp extends StatefulWidget {
 
 // Main Application's State;
 class _MyAppState extends State<MyApp> {
-  var _questionIndex = 0;
-  static const List<QuestionModel> _questions = [
+  var questionIndex = 0;
+  static const List<QuestionModel> questions = [
     QuestionModel(
       questionText: "What is your favorite color?",
       answers: ["White", "Red", "Blue"],
@@ -32,9 +32,9 @@ class _MyAppState extends State<MyApp> {
   ]; // Use a class to instantiate questions and answers; Map can be used as well;
 
   // Button answer handler;
-  void _questionAnswer() {
+  void questionAnswer() {
     setState(() {
-      _questionIndex += 1;
+      questionIndex += 1;
     });
   }
 
@@ -43,16 +43,13 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text("My First Flutter App!")),
-        body: _questionIndex < _questions.length
-            ? Column(
-                children: [
-                  Question(_questions[_questionIndex].questionText), // Question
-                  ..._questions[_questionIndex].answers!.map(
-                    (answer) => AnswerButton(answer, _questionAnswer),
-                  ), // Answer buttons
-                ],
+        body: questionIndex < questions.length
+            ? QuizQuestion(
+                questionAnswer: questionAnswer,
+                questionIndex: questionIndex,
+                questions: questions,
               )
-            : Text("You did it!"),
+            : Result("You did it"),
       ),
     );
   }
