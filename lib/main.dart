@@ -19,22 +19,33 @@ class MyApp extends StatefulWidget {
 
 // Main Application's State;
 class _MyAppState extends State<MyApp> {
-  var questionIndex = 0;
-  static const List<QuestionModel> questions = [
+  int _questionIndex = 0;
+  int _totalScore = 0;
+
+  static const List<QuestionModel> _questions = [
     QuestionModel(
       questionText: "What is your favorite color?",
-      answers: ["White", "Red", "Blue"],
+      answers: [
+        {"text": "White", "score": 1},
+        {"text": "Red", "score": 2},
+        {"text": "Blue", "score": 3},
+      ],
     ),
     QuestionModel(
       questionText: "What is your favorite animal?",
-      answers: ["Cat", "Dog", "Bird"],
+      answers: [
+        {"text": "Cat", "score": 1},
+        {"text": "Dog", "score": 2},
+        {"text": "Bird", "score": 3},
+      ],
     ),
   ]; // Use a class to instantiate questions and answers; Map can be used as well;
 
   // Button answer handler;
-  void questionAnswer() {
+  void _questionAnswer(int score) {
     setState(() {
-      questionIndex += 1;
+      _questionIndex += 1;
+      _totalScore += score;
     });
   }
 
@@ -43,13 +54,13 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text("My First Flutter App!")),
-        body: questionIndex < questions.length
+        body: _questionIndex < _questions.length
             ? QuizQuestion(
-                questionAnswer: questionAnswer,
-                questionIndex: questionIndex,
-                questions: questions,
+                questionAnswer: _questionAnswer,
+                questionIndex: _questionIndex,
+                questions: _questions,
               )
-            : Result("You did it"),
+            : Result("You did it", _totalScore),
       ),
     );
   }

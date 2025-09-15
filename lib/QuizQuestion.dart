@@ -6,24 +6,27 @@ import 'QuestionModel.dart';
 
 // ignore: must_be_immutable
 class QuizQuestion extends StatelessWidget {
-  List<QuestionModel>? questions;
-  var questionIndex;
-  VoidCallback? questionAnswer;
+  final int? questionIndex;
+  final List<QuestionModel>? questions;
+  final Function? questionAnswer;
 
-  QuizQuestion({
+  const QuizQuestion({
     super.key,
-    this.questionIndex,
-    this.questions,
-    this.questionAnswer,
+    @required this.questionIndex,
+    @required this.questions,
+    @required this.questionAnswer,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Question(questions?[questionIndex].questionText), // Question
-        ...?questions?[questionIndex].answers!.map(
-          (answer) => AnswerButton(answer, questionAnswer),
+        Question(questions?[questionIndex as int].questionText), // Question
+        ...?questions?[questionIndex as int].answers!.map(
+          (answer) => AnswerButton(
+            answer["text"] as String,
+            () => questionAnswer!(answer["score"]),
+          ),
         ), // Answer buttons
       ],
     );
