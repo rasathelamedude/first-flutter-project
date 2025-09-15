@@ -10,8 +10,6 @@ class Result extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [Text(resultText!), Text("You scored: $totalScore")],
-    );
+    return Center(child: Text("${resultText!}. Your score is: $totalScore"));
   }
 }
