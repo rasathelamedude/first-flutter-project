@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class Result extends StatelessWidget {
   final int? totalScore;
+  final VoidCallback? resetQuiz;
 
   // ignore: use_key_in_widget_constructors
-  const Result(this.totalScore);
+  const Result(this.totalScore, this.resetQuiz);
 
   String get resultPhrase {
     String? phrase;
@@ -22,10 +23,15 @@ class Result extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-        "$resultPhrase. Your score is: $totalScore",
-        style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-        textAlign: TextAlign.center,
+      child: Column(
+        children: [
+          Text(
+            "$resultPhrase. Your score is: $totalScore",
+            style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          ElevatedButton(onPressed: resetQuiz, child: Text("Restart Quiz?")),
+        ],
       ),
     );
   }
